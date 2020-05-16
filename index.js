@@ -8,8 +8,9 @@ import App from './src/App'
 import { name as appName } from './app.json'
 
 import storeConfig from './src/store/store.config'
+import { PROJECT_ID } from './env'
 
-axios.defaults.baseURL = 'https://insta-c699b.firebaseio.com/'
+axios.defaults.baseURL = `https://${PROJECT_ID}.firebaseio.com/`
 
 const store = storeConfig()
 const Redux = () => (

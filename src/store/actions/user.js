@@ -8,12 +8,13 @@ import {
   USER_NOT_FOUND
 } from './action.types'
 
-import { setMessage } from './message'
-
 import axios from 'axios'
 
+import { setMessage } from './message'
+import { API_KEY } from '../../../env'
+
 const authBaseUrl = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty'
-const API_KEY = 'AIzaSyBEvm5dnGpIzKVMw1NktlUhYP7hnXcmC3w'
+
 
 export const createUser = user => {
   return async dispatch => {
@@ -45,7 +46,6 @@ export const createUser = user => {
       }))
       console.log('server', err)
     }
-
   }
 }
 
