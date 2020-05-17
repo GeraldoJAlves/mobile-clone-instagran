@@ -14,6 +14,7 @@ const initialState = {
   isLogging: false,
   isCreatingUser: false,
   isNotFound: false,
+  token: null
 }
 
 const reducer = (state = initialState, action) => {
@@ -49,11 +50,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         name: action.payload.name,
-        email: action.payload.email
+        email: action.payload.email,
+        token: action.payload.token
       }
     case USER_LOGGED_OUT:
       return {
-        ...state,
         ...initialState
       }
     default:

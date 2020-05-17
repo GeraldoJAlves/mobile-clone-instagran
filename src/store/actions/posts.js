@@ -10,7 +10,7 @@ import { setMessage } from './message'
 
 export const addPost = post => {
 
-  return async dispatch => {
+  return async (dispatch, getState) => {
     try {
       dispatch(creatingPost())
       const resUpload = await axios({
@@ -21,8 +21,10 @@ export const addPost = post => {
           image: post.image.base64
         }
       })
+
       post.image = resUpload.data.imageUrl
-      const resPost = await axios.post('/posts.json', {
+
+      const resPost = await axios.post(`/posts.json?auth=${getState().user.token}`, {
         ...post
       })
       dispatch(fetchPosts())
@@ -42,15 +44,15 @@ export const addPost = post => {
 
 export const addComment = payload => {
 
-  return async dispatch => {
+  return async (dispatch, getState) => {
     try {
       const resGetPost = await axios.get(`/posts/${payload.postId}.json`)
 
       const comments = resGetPost.data.comments || []
 
       comments.push(payload.comment)
-
-      const resUpdatePost = await axios.patch(`/posts/${payload.postId}.json`, { comments })
+      
+      const resUpdatePost = await axios.patch(`/posts/${payload.postId}.json?auth=${getState().user.token}`, { comments })
 
       dispatch(fetchPosts())
 
@@ -61,13 +63,6 @@ export const addComment = payload => {
       }))
       console.log('erro server', err)
     }
-  }
-}
-
-export const setPosts = posts => {
-  return {
-    type: SET_POSTS,
-    payload: posts
   }
 }
 
@@ -91,6 +86,13 @@ export const fetchPosts = () => {
       console.log(err)
     }
 
+  }
+}
+
+export const setPosts = posts => {
+  return {
+    type: SET_POSTS,
+    payload: posts
   }
 }
 

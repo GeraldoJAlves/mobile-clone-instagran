@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { NavigationContainer } from '@react-navigation/native'
+import { createAppContainer, createSwitchNavigator as createSwitchNavigatorV1 } from 'react-navigation'
 import { createSwitchNavigator } from '@react-navigation/compat'
 import { createStackNavigator } from '@react-navigation/stack';
 import { createCompatNavigatorFactory } from '@react-navigation/compat';
@@ -13,6 +14,7 @@ import AddPhoto from './screens/AddPhoto'
 import Profile from './screens/Profile'
 import Login from './screens/Login'
 import Register from './screens/Register'
+import Splash from './screens/splash';
 
 const authRouter = createCompatNavigatorFactory(createStackNavigator)({
   Login: { screen: Login, navigationOptions: { title: 'Login' } },
@@ -30,7 +32,7 @@ const loginOrProfileRouter = createSwitchNavigator({
 
 const Tab = createBottomTabNavigator()
 
-export default () => {
+const MenuNavigator = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -63,3 +65,12 @@ export default () => {
     </NavigationContainer>
   )
 }
+
+const SplashRouter = createAppContainer(createSwitchNavigatorV1({
+  Splash: Splash,
+  App: MenuNavigator
+},{
+  initialRouteName: 'Splash'
+}))
+
+export default SplashRouter

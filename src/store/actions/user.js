@@ -64,6 +64,7 @@ export const login = user => {
         const resUserData = await axios.get(`/users/${resVerifyPassword.data.localId}.json`)
 
         dispatch(userLogged({
+          token: resVerifyPassword.data.idToken,
           userId: resVerifyPassword.data.localId,
           email: user.email,
           name: resUserData.data.name

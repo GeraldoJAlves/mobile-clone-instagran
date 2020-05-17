@@ -17,8 +17,8 @@ import { login } from '../store/actions/user'
 
 const initialState = {
   name: '',
-  email: 'junior.alves.2007@gmail.com',
-  password: '123456'
+  email: '',
+  password: ''
 }
 
 class Login extends Component {
