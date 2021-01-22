@@ -18,5 +18,3 @@ Mobile Clone - Instagran
 - Aprender sobre Redux
 - Aprender sobre como integrar/autenticar com o Firebase
 - Tecnicas de navegação dentro do mobile
-
-
